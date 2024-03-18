@@ -54,6 +54,37 @@ local plugins = {
       require "configs.lspconfig"
    end,
   },
+
+  -- inteligent code highlight
+  {
+    "nvim-telescope/telescope.nvim",
+    opts = {
+      defaults = {
+        vimgrep_arguments = {
+          "rg",
+          "-L",
+          "--color=never",
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+          "--smart-case",
+          "--hidden", -- live grep also dotfiles
+          "-g", "!.git/", -- ignore .git/
+          "--ignore-case"
+        },
+        file_ignore_patterns = { ".git/" },
+      },
+      pickers = {
+        find_files = {
+          hidden = true,
+          no_ignore = true, -- false == consider .gitignore .ignore
+                            -- true  == show all files
+          follow = true, -- find also symlinks
+        },
+      },
+    },
+  },
 }
 
 return plugins
