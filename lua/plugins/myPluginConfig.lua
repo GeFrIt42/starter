@@ -85,6 +85,9 @@ local plugins = {
       },
     },
   },
+  {
+    'puremourning/vimspector',
+    lazy = false,
+  },
 }
-
 return plugins
