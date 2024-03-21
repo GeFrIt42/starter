@@ -9,7 +9,8 @@ local servers = {
   "html",
   "clangd",
   "marksman",
-  "bashls"
+  "bashls",
+  "autotools_ls",
 }
 
 for _, lsp in ipairs(servers) do

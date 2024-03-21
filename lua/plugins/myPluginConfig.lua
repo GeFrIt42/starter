@@ -12,12 +12,12 @@ local plugins = {
         "ini",
         "lua",
         "make",
-        "markdown",
         "markdown_inline",
         "nix",
         "python",
         "ruby",
         "vim",
+        "make",
       },
     },
   },
@@ -35,6 +35,7 @@ local plugins = {
         -- "html-lsp",
         "prettier",
         "marksman",
+        "autotools-language-server",
         "bash-language-server"
         -- c/cpp stuff
         -- clangd and clang-format need dynamic linking that in nix works different
