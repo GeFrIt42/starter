@@ -18,3 +18,9 @@ map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
 map("n", "ff", "<Plug>VimspectorBalloonEval", { desc = "VimspectorBalloonEval in normal mode" })
 -- " for visual mode, the visually selected text
 -- xmap <Leader>di <Plug>VimspectorBalloonEval
+
+-- extra useful mappings
+-- nmap <LocalLeader><F11> <Plug>VimspectorUpFrame
+-- nmap <LocalLeader><F12> <Plug>VimspectorDownFrame
+-- nmap <LocalLeader>B     <Plug>VimspectorBreakpoints
+-- nmap <LocalLeader>D     <Plug>VimspectorDisassemble
