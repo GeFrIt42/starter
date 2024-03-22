@@ -11,3 +11,10 @@ map("n", "<leader>fm", function()
 end, { desc = "File Format with conform" })
 
 map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
+
+-- " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
+-- " for normal mode - the word under the cursor
+-- nmap <Leader>di <Plug>VimspectorBalloonEval
+map("n", "ff", "<Plug>VimspectorBalloonEval", { desc = "VimspectorBalloonEval in normal mode" })
+-- " for visual mode, the visually selected text
+-- xmap <Leader>di <Plug>VimspectorBalloonEval
