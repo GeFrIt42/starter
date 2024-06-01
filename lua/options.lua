@@ -7,6 +7,6 @@ local g = vim.g
 
 o.mouse = ""
 opt.list = true -- shot traling characters
-vim.api.nvim_set_option_value("colorcolumn", "80", {})
+vim.api.nvim_set_option_value("colorcolumn", "160", {})
 opt.relativenumber = true
 g["loaded_python3_provider"] = nil
