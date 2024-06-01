@@ -4,13 +4,19 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- disabled since conflict with default bindings
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 
 map("n", "<leader>fm", function()
   require("conform").format()
 end, { desc = "File Format with conform" })
 
-map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
+-- disabled since not usefull
+-- map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
+
+-- custum keymapping
+map("n", "c", "\"_c", { desc = "avoid c to modify clipboard" })
+map("n", "C", "\"_C", { desc = "avoid c to modify clipboard" })
 
 -- Vimspector keys mapping
 -- " mnemonic 'di' = 'debug inspect' (pick your own, if you prefer!)
