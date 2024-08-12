@@ -8,7 +8,7 @@ local plugins = {
         "c",
         "cpp",
         "css",
-        "html",
+        -- "html",
         "ini",
         "lua",
         "make",
@@ -28,20 +28,17 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        -- lua stuff
-        "lua-language-server",
-        "stylua",
-
-        -- web dev stuff
-        -- "html-lsp",
-        "prettier",
-        "marksman",
-        "autotools-language-server",
-        "bash-language-server"
+        -- disable installation of dependency because nixos dont use the same lib path standard
+        -- install manually dependency in nix config
+        -- https://github.com/Mic92/nix-ld
+        -- "lua-language-server",
+        -- "stylua",
+        -- "prettier", -- ToDo: prettierd is available in nixos, ToDo check how to use this
+        -- "marksman",
+        -- "bash-language-server", -- ToDo: check if npm packages needs nix-ld
         -- c/cpp stuff
         -- clangd and clang-format need dynamic linking that in nix works different
         -- install them in nix way to avoid dinamic linking clash
-        -- https://github.com/Mic92/nix-ld
         --"clangd",
         --"clang-format",
       },
@@ -87,9 +84,19 @@ local plugins = {
       },
     },
   },
+
+  -- debugger with dissasembly
   {
     'puremourning/vimspector',
     -- lazy = false,
   },
+
+  -- ToDo: figureout how to integrate this
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   ft = { "markdown" },
+  --   build = function() vim.fn["mkdp#util#install"]() end,
+  -- },
 }
 return plugins

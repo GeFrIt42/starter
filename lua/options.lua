@@ -10,3 +10,6 @@ opt.list = true -- shot traling characters
 vim.api.nvim_set_option_value("colorcolumn", "160", {})
 opt.relativenumber = true
 g["loaded_python3_provider"] = nil
+
+
+-- g["mkdp_browser"] = '/run/current-system/sw/bin/brave'
