@@ -1,3 +1,32 @@
+
+-- how to read file from lua: https://www.gammon.com.au/scripts/doc.php?lua=io.open
+-- :source % : source current file
+-- :messages : show logs
+local fd_os_release = assert(io.open("/etc/os-release"), "r")
+local s_os_release = fd_os_release:read("*a")
+fd_os_release:close()
+s_os_release = s_os_release:lower()
+local is_nixos = s_os_release:match("nixos")
+
+-- disable installation of dependency because nixos dont use the same lib path standard
+-- nix-ld solution since it gives priority to the rpath, it could breadk the system
+-- https://github.com/Mic92/nix-ld
+-- lsp need to be installed in the nix config
+local l_ensure_installed = {}
+if is_nixos == nil then
+  print("is not nixos")
+  -- this list need to be sync with lua/configs/lspconfig.lua
+   l_ensure_installed = {
+    "lua-language-server",
+    "stylua",
+    -- "prettier", -- ToDo: prettierd is available in nixos, ToDo check how to use this
+    "marksman",
+    "bash-language-server",
+    "clangd",
+    "clang-format",
+  }
+end
+
 local plugins = {
   -- inteligent code highlight
   {
@@ -8,7 +37,6 @@ local plugins = {
         "c",
         "cpp",
         "css",
-        -- "html",
         "ini",
         "lua",
         "make",
@@ -27,21 +55,7 @@ local plugins = {
   {
     "williamboman/mason.nvim",
     opts = {
-      ensure_installed = {
-        -- disable installation of dependency because nixos dont use the same lib path standard
-        -- install manually dependency in nix config
-        -- https://github.com/Mic92/nix-ld
-        -- "lua-language-server",
-        -- "stylua",
-        -- "prettier", -- ToDo: prettierd is available in nixos, ToDo check how to use this
-        -- "marksman",
-        -- "bash-language-server", -- ToDo: check if npm packages needs nix-ld
-        -- c/cpp stuff
-        -- clangd and clang-format need dynamic linking that in nix works different
-        -- install them in nix way to avoid dinamic linking clash
-        --"clangd",
-        --"clang-format",
-      },
+      ensure_installed = l_ensure_installed,
     },
   },
 
