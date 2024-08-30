@@ -143,6 +143,8 @@ local plugins = {
   },
 
   {
+    -- if ever want to use *dap-launch.json* maybe for remote debug? or attach to process
+    -- https://github.com/mfussenegger/nvim-dap/blob/9adbfdca13afbe646d09a8d7a86d5d031fb9c5a5/doc/dap.txt#L316
     'mfussenegger/nvim-dap',
     config = function()
     local dap, dapui = require("dap"), require("dapui")
