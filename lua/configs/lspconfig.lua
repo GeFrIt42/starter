@@ -6,9 +6,10 @@ local capabilities = configs.capabilities
 
 local lspconfig = require "lspconfig"
 local servers = {
+  "bashls",
   "clangd",
   "marksman",
-  "bashls",
+  -- "rust_analyzer",
 }
 
 for _, lsp in ipairs(servers) do

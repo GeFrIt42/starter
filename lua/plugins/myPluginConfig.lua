@@ -24,6 +24,7 @@ if is_nixos == nil then
     "bash-language-server",
     "clangd",
     "clang-format",
+    "codelldb",
   }
 end
 
@@ -37,16 +38,16 @@ local plugins = {
         "c",
         "cpp",
         "css",
+        "hcl",
         "ini",
         "lua",
+        "make",
         "make",
         "markdown_inline",
         "nix",
         "python",
-        "ruby",
+        "rust",
         "vim",
-        "make",
-        "hcl",
       },
     },
   },
@@ -99,11 +100,97 @@ local plugins = {
     },
   },
 
-  -- debugger with dissasembly
   {
-    'puremourning/vimspector',
-    -- lazy = false,
+    'mrcjkb/rustaceanvim',
+    version = '^5', -- Recommended
+    lazy = false, -- This plugin is already lazy
+    ft = "rust",
+    config = function ()
+      local codelldb_path = ""
+      local liblldb_path = ""
+      if is_nixos == nil then
+        local mason_registry = require('mason-registry')
+        local codelldb = mason_registry.get_package("codelldb")
+        local extension_path = codelldb:get_install_path() .. "/extension/"
+        codelldb_path = extension_path .. "adapter/codelldb"
+        liblldb_path = extension_path.. "lldb/lib/liblldb.dylib"
+      else
+        -- Update this path
+        local extension_path = vim.env.HOME .. '/.vscode-oss/extensions/vadimcn.vscode-lldb/'
+        codelldb_path = extension_path .. 'adapter/codelldb'
+        liblldb_path = extension_path .. 'lldb/lib/liblldb'
+        -- The liblldb extension is .so for Linux and .dylib for MacOS
+        local this_os = vim.uv.os_uname().sysname;
+        liblldb_path = liblldb_path .. (this_os == "Linux" and ".so" or ".dylib")
+      end
+      -- :checkhealth rustaceanvim
+      local cfg = require('rustaceanvim.config')
+
+      vim.g.rustaceanvim = {
+        -- default_settings = {
+        --   -- rust-analyzer language server configuration
+        --   ['rust-analyzer'] = {
+        --     cargo = {
+        --       allFeatures = true
+        --     },
+        --   },
+        -- },
+        dap = {
+          adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+        },
+      }
+    end
   },
+
+  {
+    'mfussenegger/nvim-dap',
+    config = function()
+    local dap, dapui = require("dap"), require("dapui")
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
+      end
+    end,
+  },
+
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
+    config = function()
+      require("dapui").setup()
+    end,
+  },
+
+  {
+    'saecki/crates.nvim',
+    ft = {"toml"},
+    config = function()
+      require("crates").setup {
+        completion = {
+          cmp = {
+            enabled = true
+          },
+        },
+      }
+      require('cmp').setup.buffer({
+        sources = { { name = "crates" }}
+      })
+    end
+  },
+
+  -- debugger with dissasembly
+  -- {
+    -- 'puremourning/vimspector',
+    -- lazy = false,
+  -- },
 
   -- ToDo: figureout how to integrate this
   -- {
