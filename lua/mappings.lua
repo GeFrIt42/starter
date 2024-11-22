@@ -22,10 +22,11 @@ map("n", "C", "\"_C", { desc = "avoid c to modify clipboard" })
 -- Nvim DAP
 -- https://github.com/letsgetrusty/neovim-rust/blob/main/lua/mappings.lua
 -- https://github.com/mfussenegger/nvim-dap/blob/9adbfdca13afbe646d09a8d7a86d5d031fb9c5a5/doc/dap.txt#L316
+-- https://vonheikemen.github.io/devlog/tools/setup-nvim-lspconfig-plus-nvim-cmp/
 map("n", "<Leader>dl", "<cmd>lua require'dap'.step_into()<CR>", { desc = "Debugger step into" })
 map("n", "<Leader>dj", "<cmd>lua require'dap'.step_over()<CR>", { desc = "Debugger step over" })
 map("n", "<Leader>dk", "<cmd>lua require'dap'.step_out()<CR>", { desc = "Debugger step out" })
-map("n", "<Leader>dc>", "<cmd>lua require'dap'.continue()<CR>", { desc = "Debugger continue" })
+map("n", "<Leader>dc", "<cmd>lua require'dap'.continue()<CR>", { desc = "Debugger continue" })
 map("n", "<Leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", { desc = "Debugger toggle breakpoint" })
 map(
   "n",
@@ -64,7 +65,7 @@ map("n", "<leader>la", function()  vim.cmd.RustLsp('codeAction') end, { desc = "
 -- map("n", "<leader>a", function() vim.lsp.buf.codeAction() end, { silent = true, buffer = bufnr })
 
 -- Displays hover information about the symbol under the cursor
-map('n', '<Leader>lK', '<cmd>lua vim.lsp.buf.hover()<cr>', { desc = "hover", buffer = true })
+map('n', '<Leader>lk', '<cmd>lua vim.lsp.buf.hover()<cr>', { desc = "hover", buffer = true })
 -- Jump to the definition
 map('n', '<Leader>ld', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = "j-def", buffer = true })
 -- Jump to declaration
