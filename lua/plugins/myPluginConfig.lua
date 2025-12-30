@@ -13,20 +13,20 @@ local is_nixos = s_os_release:match("nixos")
 -- https://github.com/Mic92/nix-ld
 -- lsp need to be installed in the nix config
 local l_ensure_installed = {}
-if is_nixos == nil then
-  print("is not nixos")
+-- if is_nixos == nil then
+  -- print("is not nixos")
   -- this list need to be sync with lua/configs/lspconfig.lua
-   l_ensure_installed = {
-    "lua-language-server",
-    "stylua",
+    -- l_ensure_installed = {
+    -- "lua-language-server",
+    -- "stylua",
     -- "prettier", -- ToDo: prettierd is available in nixos, ToDo check how to use this
-    "marksman",
-    "bash-language-server",
-    "clangd",
-    "clang-format",
-    "codelldb",
-  }
-end
+    -- "marksman",
+    -- "bash-language-server",
+    -- "clangd",
+    -- "clang-format",
+    -- "codelldb",
+  -- }
+-- end
 
 local plugins = {
   -- inteligent code highlight
@@ -37,7 +37,7 @@ local plugins = {
         "bash",
         "c",
         "cpp",
-        "css",
+        -- "css",
         "hcl",
         "ini",
         "lua",
