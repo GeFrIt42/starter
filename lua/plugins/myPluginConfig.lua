@@ -109,9 +109,10 @@ local plugins = {
       local codelldb_path = ""
       local liblldb_path = ""
       if is_nixos == nil then
-        local mason_registry = require('mason-registry')
-        local codelldb = mason_registry.get_package("codelldb")
-        local extension_path = codelldb:get_install_path() .. "/extension/"
+        -- local mason_registry = require('mason-registry')
+        -- local codelldb = mason_registry.get_package("codelldb")
+        -- local extension_path = codelldb:get_install_path() .. "/extension/"
+        local extension_path = vim.env.HOME .. '/.local/share/nvim/mason/packages/codelldb/'
         codelldb_path = extension_path .. "adapter/codelldb"
         liblldb_path = extension_path.. "lldb/lib/liblldb.dylib"
       else
