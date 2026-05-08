@@ -28,6 +28,8 @@ local l_ensure_installed = {}
   -- }
 -- end
 
+-- :checkhealth nvim-treesitter
+-- ToDo: check why this is not working anymore
 local plugins = {
   -- inteligent code highlight
   {
@@ -176,16 +178,7 @@ local plugins = {
     'saecki/crates.nvim',
     ft = {"toml"},
     config = function()
-      require("crates").setup {
-        completion = {
-          cmp = {
-            enabled = true
-          },
-        },
-      }
-      require('cmp').setup.buffer({
-        sources = { { name = "crates" }}
-      })
+      require("crates").setup()
     end
   },
 
