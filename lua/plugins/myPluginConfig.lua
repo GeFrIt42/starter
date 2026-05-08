@@ -50,6 +50,7 @@ local plugins = {
         "rust",
         "vim",
         "nu",
+        "starlark_rust",
       },
     },
   },
